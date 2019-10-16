@@ -1,0 +1,191 @@
+﻿<Controls:MetroWindow x:Class="DoubleP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:iconPacks = "http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:DoubleP"
+                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      mc:Ignorable="d"
+       Title="亲/疏气溶胶吸湿配置" Height="590" Width="800" ShowTitleBar="True" MinWidth="700" MinHeight="500" Closing="MetroWindow_Closing" Closed="MetroWindow_Closed" >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Green.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <TabControl  Margin="10,10,10,10" >
+        <TabItem Header="参数设置" x:Name="Before">
+            <Grid Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150*"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                    <ColumnDefinition Width="200*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ScrollViewer>
+                            <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=" Auto"></RowDefinition>
+                                <RowDefinition Height=" 5"></RowDefinition>
+                                <RowDefinition Height=" Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="亲水性">
+                                <Viewbox>
+                                    <StackPanel  Grid.Row="0" Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label Content="吸湿性参数:"></Label>
+                                            <TextBox x:Name="K_Data" Width="100"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="潮解相对湿度:"></Label>
+                                            <TextBox x:Name="DRH" Width="87"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="基础模型半径:"></Label>
+                                            <TextBox x:Name="R1orgin" Width="123"></TextBox>
+                                        </StackPanel >
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="干粒子粒径:"></Label>
+                                            <TextBox x:Name="RLorgin" Width="123"></TextBox>
+                                        </StackPanel >
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="折射率:"></Label>
+                                            <TextBox x:Name="Ri1" Width="110"></TextBox>
+                                            <Button x:Name="Clear1Btn" Content="重填" Margin="20,0,0,0" Click="Cl1Btn_Click"/>
+                                            <Button x:Name="Done1Btn" Content="确认" Margin="20,0,0,0" Click="D1Btn_Click"/>
+                                        </StackPanel >
+                                        <StackPanel Orientation="Horizontal" Margin="5,10,5,0"/>
+                                    </StackPanel>
+                                </Viewbox>
+                            </GroupBox>
+                            <StackPanel Grid.Row="2" Orientation="Vertical">
+                                    <!--<CheckBox Content="换行(\r\n)" Margin="10,5,0,0"></CheckBox>-->
+                                    <StackPanel Orientation="Horizontal" Margin="5,5,0,0"/>
+                                    <StackPanel Orientation="Horizontal" Margin="5,10,0,0"/>
+                                </StackPanel>
+                            <GroupBox Grid.Row="3" Header="疏水性">
+                                <Viewbox>
+                                    <StackPanel Grid.Row="3" Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="基础模型半径:"></Label>
+                                            <TextBox x:Name="R2orgin" Width="123"></TextBox>
+                                        </StackPanel >
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="干粒子粒径:"></Label>
+                                            <TextBox x:Name="RBorgin" Width="123"></TextBox>
+                                        </StackPanel >
+                                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                                            <Label  Content="折射率:"></Label>
+                                            <TextBox x:Name="Ri2" Width="110"></TextBox>
+                                            <Button x:Name="Clear2Btn" Content="重填" Margin="20,0,0,0" Click="Cl2Btn_Click"/>
+                                            <Button x:Name="Done2Btn" Content="确认" Margin="20,0,0,0" Click="D2Btn_Click"/>
+                                        </StackPanel >
+                                    </StackPanel>
+                                </Viewbox>
+                            </GroupBox>
+                        </Grid>
+                        </ScrollViewer>
+
+                </Grid>
+                <Grid Grid.Column="3">
+                    <GroupBox Header="参数确认">
+                        <RichTextBox x:Name="Datashow" IsReadOnly="True"/>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="计算" x:Name="Calculate">
+            <Grid Background="White">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100*"></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition Width="100*"></ColumnDefinition>
+                        <ColumnDefinition Width="5"></ColumnDefinition>
+                        <ColumnDefinition Width="100*"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="200*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="未潮解">
+                        <RichTextBox x:Name="BeShowBox" IsReadOnly="True"/>
+                    </GroupBox>
+                    <GroupBox Grid.Row="2">
+                        <Viewbox>
+                            <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0"/>
+                                <Button x:Name="BeShapeBtn" Content="创建shape文件" Margin="0,5,0,5" Click="BeShapeBtn_Click"/>
+                                <Button x:Name="BeDielBtn" Content="创建折射率文件" Margin="0,5,0,5" Click="BeDielBtn_Click"/>
+                                <Button x:Name="BeParfileBtn" Content="创建配置文件" Margin="0,5,0,5" Click="BeParfile_Click"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </GroupBox>
+                </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="200*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0" Header="壳外">
+                            <RichTextBox x:Name="OutShowBox" IsReadOnly="True"/>
+                        </GroupBox>
+                    <GroupBox Grid.Row="2">
+                        <Viewbox>
+                            <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0"/>
+                                <Button x:Name="OutShapeBtn" Content="创建shape文件" Margin="0,5,0,5" Click="OutShapeBtn_Click"/>
+                                <Button x:Name="OutDielBtn" Content="创建折射率文件" Margin="0,5,0,5" Click="OutDielBtn_Click"/>
+                                <Button x:Name="OutParfileBtn" Content="创建配置文件" Margin="0,5,0,5" Click="OutParfile_Click"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </GroupBox>
+                </Grid>
+                    <Grid Grid.Column="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="200*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0" Header="壳内">
+                            <RichTextBox x:Name="InShowBox" IsReadOnly="True"/>
+                        </GroupBox>
+                    <GroupBox Grid.Row="2">
+                        <Viewbox>
+                            <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0"/>
+                                <Button x:Name="InShapeBtn" Content="创建shape文件" Margin="0,5,0,5" Click="InShapeBtn_Click"/>
+                                <Button x:Name="InDielBtn" Content="创建折射率文件" Margin="0,5,0,5" Click="InDielBtn_Click"/>
+                                <Button x:Name="InParfileBtn" Content="创建配置文件" Margin="0,5,0,5" Click="InParfile_Click"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </GroupBox>
+                </Grid>
+
+                </Grid>
+        </TabItem>
+        <TabItem Header="关于" x:Name="Inside">
+        </TabItem>
+
+    </TabControl>
+
+
+</Controls:MetroWindow>
